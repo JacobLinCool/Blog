@@ -24,7 +24,7 @@ function detectBrowser(){
     }
     if (isSafari) {
         browser = '您正在使用 Safari/Chrome 瀏覽器';
-        browser = '太棒了!';
+        browser = '太棒了! 您正在使用 Chrome 瀏覽器';
     }
     return browser;
 }
