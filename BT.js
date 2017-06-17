@@ -7,24 +7,19 @@ function detectBrowser(){
     
    
     if (isIE7) {
-        browser = '您正在使用 IE7 瀏覽器';
-        browser = '請使用 Chrome 瀏覽器以獲取更好的使用體驗';
+        browser = '您正在使用 IE7 瀏覽器, 請使用 Chrome 瀏覽器以獲取更好的使用體驗';
     }
     if (isIE) {
-        browser = '您正在使用 IE 瀏覽器';
-        browser = '請使用 Chrome 瀏覽器以獲取更好的使用體驗';
+        browser = '您正在使用 IE 瀏覽器, 請使用 Chrome 瀏覽器以獲取更好的使用體驗';
     }
     if (isFirefox) {
-        browser = '您正在使用 Firefox 瀏覽器';
-        browser = '請使用 Chrome 瀏覽器以獲取更好的使用體驗';
+        browser = '您正在使用 Firefox 瀏覽器, 請使用 Chrome 瀏覽器以獲取更好的使用體驗';
     }
     if (isOpera) {
-        browser = '您正在使用 Opera 瀏覽器';
-        browser = '請使用 Chrome 瀏覽器以獲取更好的使用體驗';
+        browser = '您正在使用 Opera 瀏覽器, 請使用 Chrome 瀏覽器以獲取更好的使用體驗';
     }
     if (isSafari) {
-        browser = '您正在使用 Safari/Chrome 瀏覽器';
-        browser = '太棒了! 您正在使用 Chrome 瀏覽器';
+        browser = '您正在使用 Safari/Chrome 瀏覽器, 太棒了! 您正在使用 Safari/Chrome 瀏覽器';
     }
     return browser;
 }
