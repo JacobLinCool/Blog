@@ -3,7 +3,9 @@ function detectBrowser(){
     var isIE7 = navigator.userAgent.search("MSIE 7") > -1;
     var isFirefox = navigator.userAgent.search("Firefox") > -1;
     var isOpera = navigator.userAgent.search("Opera") > -1;
-    var isSafari = navigator.userAgent.search("Safari") > -1;//Google瀏覽器是用這核心
+    // var isSafari = navigator.userAgent.search("Safari") > -1;//Google瀏覽器是用這核心
+    var isChrome = /Chrome/.test(navigator.userAgent) && /Google Inc/.test(navigator.vendor);
+    var isSafari = /Safari/.test(navigator.userAgent) && /Apple Computer/.test(navigator.vendor);
     
    
     if (isIE7) {
@@ -19,7 +21,10 @@ function detectBrowser(){
         browser = '您正在使用 Opera 瀏覽器, 請使用 Chrome 瀏覽器以獲取更好的使用體驗';
     }
     if (isSafari) {
-        browser = '您正在使用 Safari/Chrome 瀏覽器, 太棒了! 您正在使用 Safari/Chrome 瀏覽器';
+        browser = '您正在使用 Safari 瀏覽器, 請使用 Chrome 瀏覽器以獲取更好的使用體驗';
+    }
+    if (isChrome) {
+        browser = '您正在使用 Chrome 瀏覽器, 太棒了! 您正在使用 Chrome 瀏覽器';
     }
     return browser;
 }
