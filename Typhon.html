@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style type="text/css"> 
+.wrapper
+ { width:800px; height:645px; margin:0px 0px; overflow:hidden; position:relative; }
+ .iframe { width:1024px;height:800px; position:absolute; top:-220px; left:-180px; }
+ </style> 
+</head>
+<body>
+
+<table>
+<th>
+ 於<span id='s'></span>秒後重新載入 
+ 或點此<span><Input Type="Button" Value="重新整理" onClick="window.location.reload();"></span>    <Input Type="Button" Value="列印網頁" onClick="javascript:print();">
+</th>
+<tr>
+<td>
+<img src="http://www.cwb.gov.tw/V7/prevent/warning/Data/B20.gif?"height="520">
+</td>
+<td>
+<div class="wrapper"> 
+<iframe class="iframe" src="http://www.cwb.gov.tw/V7/prevent/warning/w21.htm?" scrolling="no" frameborder="0">
+ </iframe>
+ </div>
+ </td>
+ </tr>
+ <tr>
+ <td>
+<div class="wrapper"> 
+<iframe class="iframe" src="http://www.cwb.gov.tw/V7/prevent/warning/TED.htm?" scrolling="no" frameborder="0">
+ </iframe>
+ </div>
+ </td>
+ <td>
+ <img src="http://www.cwb.gov.tw/V7/observe/rainfall/Data/hk.jpg"height="520">
+ </td>
+ </tr>
+ </table>
+<script type="text/javascript">
+
+var t = 180;
+
+function showTime()
+{
+    t -= 1;
+    document.getElementById('s').innerHTML= t;
+    
+    if(t==0)
+    {
+        location.href='';
+    }
+    
+    setTimeout("showTime()",1000);
+}
+
+showTime();
+</script>
+</body>
+</html>
