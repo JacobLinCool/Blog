@@ -1,0 +1,18 @@
+<html>
+<head>
+<title>JLCBooks</title>
+<script src=“http://futurepress.github.io/epub.js/build/epub.min.js”></script>
+<script src=“http://futurepress.github.io/epub.js/build/libs/zip.min.js”></script>
+
+</head>
+<body>
+<div onclick="Book.prevPage();">‹</div>
+<div id="area"></div>
+<div onclick="Book.nextPage();">›</div>
+
+<script>
+	var Book = ePub("url/to/book/");
+	Book.renderTo("area");
+</script>
+</body>
+</html>
