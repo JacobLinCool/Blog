@@ -54,15 +54,16 @@
             color: #000;
           }
         </style>
+	
+	      <script>
+            "use strict";
+            var Book = ePub("hhttp://www.haodoo.net/?M=d&P=D55a.epub");
+        </script>
 </head>
 <body>
 <div onclick="Book.prevPage();">‹</div>
 <div id="area"></div>
 <div onclick="Book.nextPage();">›</div>
 
-<script>
-	var Book = ePub("http://www.haodoo.net/?M=d&P=D55a.epub");
-	Book.renderTo("area");
-</script>
 </body>
 </html>
