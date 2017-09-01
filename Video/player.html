@@ -3,57 +3,34 @@
 	<title>JLCVideo - Player</title>
 	<link href="https://vjs.zencdn.net/6.2.5/video-js.css" rel="stylesheet">
 	<script src="https://vjs.zencdn.net/ie8/1.1.2/videojs-ie8.min.js"></script>
-	
-<script type="text/javascript">
-	
-    function init() {
-        var video = document.getElementById("VideoMp4Source");                                               
-        if (video.canPlayType) {   // tests that we have HTML5 video support
-            // if successful, display buttons and set up events
-            document.getElementById("buttonbar").style.display = "block";
-            document.getElementById("inputField").style.display = "block";
-            //  button events
-            //  Play
-            document.getElementById("play").addEventListener("click", vidplay, false);
-            //  Restart
-            document.getElementById("restart").addEventListener("click", function(){
-                setTime(0);
-             }, false);
-            //  Skip backward 10 seconds
-            document.getElementById("rew").addEventListener("click", function(){
-                setTime(-10);                
-            }, false);
-            //  Skip forward 10 seconds
-            document.getElementById("fwd").addEventListener("click", function(){
-                setTime(10);
-            }, false);                
-            //  set src == latest video file URL
-            document.getElementById("loadVideo").addEventListener("click", getVideo, false);
-                            
-            // fail with message 
-            video.addEventListener("error", function(err) {
-                errMessage(err);
-            }, true);
-            function getVideo() {
-                var fileURL = document.getElementById("VideoURLmp4").value;               
-                if (fileURL != ""){
-                   video.src = fileURL;
-                   video.load();  
-                 } else {
-                    errMessage("Enter a valid video URL"); 
-                 }
-	    }
-	}
-    }
-</script>
+	<script>
+      (function(window, videojs) {
+        var player = window.player = videojs('video');
+
+        // hook up the video switcher
+        var loadUrl = document.getElementById('load-url');
+        var url = document.getElementById('url');
+        loadUrl.addEventListener('submit', function(event) {
+          event.preventDefault();
+          player.src({
+            src: url.value,
+            type: 'application/x-mpegURL'
+          });
+          return false;
+        });
+      }(window, window.videojs));
+    </script>
 </head>
 <body>
-	<div id= "inputField">
-    <input type="text" id="VideoURLmp4" value="" />        
-    <button id="loadVideo" >Load</button>
-	</div>
+	<form id="load-url">
+          <label>
+            Video URL:
+            <input id="url" type="url" value="">
+          </label>
+          <button type="submit">Load</button>
+        </form>
 	<video id="video" class="video-js" controls preload="auto" width="1000" height="680" poster="" data-setup="{}">
-		<source id="VideoMp4Source"src="" type="application/x-mpegURL">
+		<source src="" type="application/x-mpegURL">
 		<p class="vjs-no-js">請啟用Javascript以播放影片或
 			<a href="https://www.google.com.tw/chrome" target="_blank">下載最新版瀏覽器</a>
 		</p>
