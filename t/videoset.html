@@ -1,0 +1,105 @@
+
+<script type="text/javascript">
+    // Master function, encapsulates all functions
+    function init() {
+        var video = document.getElementById("Video1");                                               
+        if (video.canPlayType) {   // tests that we have HTML5 video support
+            // if successful, display buttons and set up events
+            document.getElementById("buttonbar").style.display = "block";
+            document.getElementById("inputField").style.display = "block";
+
+            //  button events
+            //  Play
+            document.getElementById("play").addEventListener("click", vidplay, false);
+            //  Restart
+            document.getElementById("restart").addEventListener("click", function(){
+                setTime(0);
+             }, false);
+            //  Skip backward 10 seconds
+            document.getElementById("rew").addEventListener("click", function(){
+                setTime(-10);                
+            }, false);
+            //  Skip forward 10 seconds
+            document.getElementById("fwd").addEventListener("click", function(){
+                setTime(10);
+            }, false);                
+            //  set src == latest video file URL
+            document.getElementById("loadVideo").addEventListener("click", getVideo, false);
+                            
+            // fail with message 
+            video.addEventListener("error", function(err) {
+                errMessage(err);
+            }, true);
+
+            //  button helper functions 
+            //  skip forward, backward, or restart
+            function setTime(tValue) {
+            //  if no video is loaded, this throws an exception 
+                try {
+                    if (tValue == 0) {
+                        video.currentTime = tValue;
+                    }
+                    else {
+                        video.currentTime += tValue;
+                    }
+                    
+                 } catch (err) {
+                     // errMessage(err) // show exception
+                 errMessage("Video content might not be loaded");
+                   }
+         }
+             //  play video
+             function vidplay(evt) {
+                if (video.src == "") {  // on first run, src is empty, go get file
+                    getVideo();
+                }
+                button = evt.target; //  get the button id to swap the text based on the state                                    
+                if (video.paused) {   // play the file, and display pause symbol
+                   video.play();
+                   button.textContent = "||";
+                } else {              // pause the file, and display play symbol  
+                   video.pause();
+                   button.textContent = ">";
+                }                                        
+            }
+            //  load video file from input field
+            function getVideo() {
+                var fileURL = document.getElementById("videoFile").value;  // get input field                    
+                if (fileURL != ""){
+                   video.src = fileURL;
+                   video.load();  // if HTML source element is used
+                   document.getElementById("play").click();  // start play
+                 } else {
+                    errMessage("Enter a valid video URL");  // fail silently
+                 }
+            }
+            //  display an error message 
+            function errMessage(msg) {
+            // displays an error message for 5 seconds then clears it
+                document.getElementById("errorMsg").textContent = msg;
+                setTimeout("document.getElementById('errorMsg').textContent=''", 5000);
+            }
+
+        } // end of runtime
+    }// end of master         
+</script>
+
+</head>
+<body onload="init();">        
+
+<video id="Video1" style="border: 1px solid blue;" height="240" width="320">      
+     HTML5 Video is required for this example
+</video>
+
+<div id="buttonbar" style="display: none;")>
+    <button id="restart" >[]</button> 
+    <button id="rew" >&lt;&lt;</button>
+    <button id="play">&gt;</button>
+    <button id="fwd" >&gt;&gt;</button>
+</div>     
+<div id= "inputField" style="display:none;" >
+    <input type="text" id="videoFile" value="http://ie.microsoft.com/testdrive/ieblog/2011/nov/pp4_blog_demo.mp4" />        
+    <button id="loadVideo" >Load</button>
+</div>
+<div id="errorMsg" style="color:Red;" ></div>
+
