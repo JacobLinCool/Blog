@@ -5,6 +5,35 @@
 	<script src="https://vjs.zencdn.net/ie8/1.1.2/videojs-ie8.min.js"></script>
 	
 <script type="text/javascript">
+	
+    function init() {
+        var video = document.getElementById("video");                                               
+        if (video.canPlayType) {   // tests that we have HTML5 video support
+            // if successful, display buttons and set up events
+            document.getElementById("buttonbar").style.display = "block";
+            document.getElementById("inputField").style.display = "block";
+            //  button events
+            //  Play
+            document.getElementById("play").addEventListener("click", vidplay, false);
+            //  Restart
+            document.getElementById("restart").addEventListener("click", function(){
+                setTime(0);
+             }, false);
+            //  Skip backward 10 seconds
+            document.getElementById("rew").addEventListener("click", function(){
+                setTime(-10);                
+            }, false);
+            //  Skip forward 10 seconds
+            document.getElementById("fwd").addEventListener("click", function(){
+                setTime(10);
+            }, false);                
+            //  set src == latest video file URL
+            document.getElementById("loadVideo").addEventListener("click", getVideo, false);
+                            
+            // fail with message 
+            video.addEventListener("error", function(err) {
+                errMessage(err);
+            }, true);
             function getVideo() {
                 var fileURL = document.getElementById("VideoURLmp4").value;               
                 if (fileURL != ""){
