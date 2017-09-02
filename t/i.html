@@ -1,0 +1,58 @@
+<head>
+<link rel="stylesheet" href="https://www.hlsplayer.net/libs/font-awesome/css/font-awesome.min.css">
+</head>
+<body>
+<div class="container">
+<form id="player-form">
+<div class="input-group url-control">
+<input type="text" class="form-control" id="player-src" value="" placeholder="http://www.example.com/live/playlist.m3u8" required="">
+<span class="input-group-btn">
+<button type="submit" class="btn btn-success" id="player-start">Play</button>
+</span>
+</div>
+</form>
+<div class="checkbox"></div>
+<div id="player-notes" class="hidden">
+<label><input type="checkbox" id="player-proxy">
+Enable this when you see a cross-domain error.</label>
+</div>
+<div id="player-container">
+<div id="player"></div>
+<div id="player-tip"></div>
+</div>
+</div>
+
+<script src="https://www.hlsplayer.net/libs/jquery/jquery.min.js"></script>
+<script src="https://www.hlsplayer.net/libs/bootstrap/js/bootstrap.min.js"></script>
+<script src="https://www.hlsplayer.net/libs/swfobject/swfobject.min.js"></script>
+<script src="https://www.hlsplayer.net/js/main.js?v=1.0.14"></script>
+
+<script>
+	var cb = function() {
+		var l = document.createElement('link');
+		l.rel = 'stylesheet';
+		l.href = 'https://www.hlsplayer.net/libs/font-awesome/css/font-awesome.min.css';
+		var h = document.getElementsByTagName('head')[0];
+		h.parentNode.insertBefore(l, h);
+	};
+	var raf = requestAnimationFrame || mozRequestAnimationFrame
+			|| webkitRequestAnimationFrame || msRequestAnimationFrame;
+	if (raf)
+		raf(cb);
+	else
+		window.addEventListener('load', cb);
+</script>
+<script>
+		function play() {
+			var src = $('#player-src').val().trim();
+			if (src) {
+				playM3U8(src);
+			}
+			return false;
+		}
+		$(document).ready(function() {
+			play();
+			$('#player-form').submit(play);
+		});
+	</script>
+</body>
