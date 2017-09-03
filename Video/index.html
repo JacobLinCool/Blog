@@ -4,11 +4,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js"></script>
 	
     <script>
-    var clipboard = new Clipboard('.btn', {
-        text: function() {
-            return 'http://vod7video.pts.org.tw/output/explosion_2/201707292100.m3u8';
-        }
-    });
+    var clipboard = new Clipboard('.btn');
     clipboard.on('success', function(e) {
         console.log(e);
     });
@@ -40,5 +36,14 @@ a:hover, a:focus {
 <h2>Coming Soon</h2>
 <p style="color:red;">本平台目前只支援 iOS 作業系統  由此購買Apple產品: <a style="color:red;" href="https://www.apple.com">www.apple.com</a></p>
   <p>如使用其他作業系統請<a href="./player">使用我們的播放器</a></p>
+	
+	<!--TEST-->
+	<!-- Target -->
+<input id="foo" value="https://github.com/zenorocha/clipboard.js.git">
+
+<!-- Trigger -->
+<button class="btn" data-clipboard-target="#foo">
+    <img src="https://clipboardjs.com/assets/clippy.svg" alt="Copy to clipboard">
+</button>
 </body>
 </html>
