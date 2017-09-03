@@ -2,16 +2,23 @@
 <head>
 <title>JLCVideo</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js"></script>
+<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js"></script>-->
 	
     <script>
-    var clipboard = new Clipboard('.btn');
-    clipboard.on('success', function(e) {
-        console.log(e);
-    });
-    clipboard.on('error', function(e) {
-        console.log(e);
-    });
+    var copyTextareaBtn = document.querySelector('.js-textareacopybtn');
+
+copyTextareaBtn.addEventListener('click', function(event) {
+  var copyTextarea = document.querySelector('.js-copytextarea');
+  copyTextarea.select();
+
+  try {
+    var successful = document.execCommand('copy');
+    var msg = successful ? 'successful' : 'unsuccessful';
+    console.log('Copying text command was ' + msg);
+  } catch (err) {
+    console.log('Oops, unable to copy');
+  }
+});
     </script>
   <style>
     
@@ -39,12 +46,9 @@ a:hover, a:focus {
   <p>如使用其他作業系統請<a href="./player">使用我們的播放器</a></p>
 	
 	<!--TEST-->
-	<!-- Target -->
-<input id="foo" value="https://github.com/zenorocha/clipboard.js.git">
-
-<!-- Trigger -->
-<button class="btn" data-clipboard-target="#foo">
-    <img src="https://clipboardjs.com/assets/clippy.svg" alt="Copy to clipboard">
-</button>
+	<p>
+  <button class="js-textareacopybtn" style="vertical-align:top;">Copy Textarea</button>
+  <textarea class="js-copytextarea">Hello I'm some text</textarea>
+</p>
 </body>
 </html>
