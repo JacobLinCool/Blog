@@ -1,0 +1,68 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title>Upload</title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1561">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; line-height: 14.0px; font: 12.0px Times; color: #000000; -webkit-text-stroke: #000000}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; line-height: 14.0px; font: 12.0px Times; color: #000000; -webkit-text-stroke: #000000; min-height: 14.0px}
+    span.s1 {font-kerning: none}
+    span.s2 {font: 12.0px 'Songti TC'; font-kerning: none}
+  </style>
+</head>
+<body>
+<p class="p1"><span class="s1">&lt;html&gt;&lt;head&gt;</span></p>
+<p class="p1"><span class="s1">&lt;title&gt;Upload&lt;/title&gt;</span></p>
+<p class="p1"><span class="s1">&lt;script src="http://code.jquery.com/jquery-1.4.2.min.js" type="text/javascript"&gt;&lt;/script&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">&lt;script language="JavaScript" type="text/javascript"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>var fileSize = 0; //</span><span class="s2">檔案大小</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>var SizeLimit = 1024;<span class="Apple-converted-space">  </span>//</span><span class="s2">上傳上限，單位</span><span class="s1">:byte</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>function checkFile() {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>var f = document.getElementById("uploadfile");</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>//FOR IE</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>if ($.browser.msie) {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>var img = new Image();</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>img.onload = checkSize;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>img.src = f.value;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>//FOR Firefox,Chrome</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>else {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>fileSize = f.files.item(0).size;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>checkSize();</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>//</span><span class="s2">檢查檔案大小</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>function checkSize() {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>//FOR IE FIX</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>if ($.browser.msie) {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>fileSize = this.fileSize;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>if (fileSize &gt; SizeLimit) {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>Message((fileSize / 1024).toPrecision(4), (SizeLimit / 1024).toPrecision(2));</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>} else {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>document.FileForm.submit();</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>function Message(file, limit) {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>var msg = "</span><span class="s2">您所選擇的檔案大小為</span><span class="s1"> " + file + " kB\n</span><span class="s2">已超過上傳上限</span><span class="s1"> " + limit + " kB\n</span><span class="s2">不允許上傳！</span><span class="s1">"</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>alert(msg);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>}<span class="Apple-converted-space"> </span></span></p>
+<p class="p1"><span class="s1">&lt;/script&gt;</span></p>
+<p class="p1"><span class="s1">&lt;/head&gt;</span></p>
+<p class="p1"><span class="s1">&lt;body&gt;</span></p>
+<p class="p1"><span class="s2">　</span><span class="s1">&lt;form action="upload.php" method="post" enctype="multipart/form-data"&gt;</span></p>
+<p class="p1"><span class="s2">　選擇檔案</span><span class="s1">:&lt;input type="file" name="uploadfile" id="file"&gt;&lt;br&gt;</span></p>
+<p class="p1"><span class="s2">　</span><span class="s1">&lt;input type="submit" name="submit" value="</span><span class="s2">上傳檔案</span><span class="s1">"&gt;</span></p>
+<p class="p1"><span class="s2">　</span><span class="s1">&lt;/form&gt;</span></p>
+<p class="p2"><span class="s1"><span class="Apple-converted-space"> </span></span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>&lt;/body&gt;&lt;/html&gt;</span></p>
+</body>
+</html>
