@@ -1,0 +1,53 @@
+<html>
+<head>
+	<title>Download Minecraft Server</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<script>
+		function get_vanilla() {
+			var version = document.getElementById('version').value;
+			if(version == ""){
+				window.location.href="https://minecraft.net/zh-hant/download/server";
+			   }
+			else {
+				window.location.href="https://s3.amazonaws.com/Minecraft.Download/versions/"+version+"/minecraft_server."+version+".jar";
+			}
+		}
+		function get_forge() {
+			var version = document.getElementById('version').value;
+			if(version == ""){
+				window.location.href="https://files.minecraftforge.net/";
+			}
+			else {
+				window.location.href="https://files.minecraftforge.net/maven/net/minecraftforge/forge/index_"+version+".html";
+			}
+		}
+		function get_spigot() {
+			var version = document.getElementById('version').value;
+			if(version == ""){
+				window.location.href="https://hub.spigotmc.org/jenkins/job/BuildTools/lastBuild/";
+			}
+			else {
+				window.location.href="https://hub.spigotmc.org/jenkins/job/BuildTools/lastBuild/";
+			}
+		}
+	</script>
+</head>
+<body>
+	<div style="text-align: center;" class="container">
+		<div>
+			<h1>Download Minecraft Server</h1>
+		</div>
+		<hr>
+		<div class="">
+			<p>Type the Minecraft Server version:</p>
+			<input type="text" id="version">
+			<button onclick="get_vanilla()">Download</button>
+			<hr>
+			<p>OR</p>
+			<span>Download Forge(Mod Server): </span><button onclick="get_forge()">Get Forge</button>
+			
+			</div>
+	
+	</div>
+</body>
+</html>
