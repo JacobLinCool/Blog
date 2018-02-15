@@ -1,0 +1,46 @@
+<html>
+<head>
+<title>快速網頁製造機</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="UTF-8"/>
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+</head>
+<body>
+<div class="w3-container">
+<h1>快速網頁製造機</h1>
+<div class="w3-center w3-blue w3-round">
+<label class="w3-margin">Web Title:</label><input id="web title" type="text"/>
+</div>
+<div class="w3-card-2 w3-container w3-padding w3-margin w3-center w3-display-container">
+<label>Card 1 Title: </label><input id="c1 title" type="text"/><br/>
+<label>Youtube Video URL: </label><input id="ytvideo" type="url"/><br/>
+<label>Youtube Video Name: </label><input id="ytvideoname" type="text"/>
+</div>
+<div class="w3-card-2 w3-container w3-padding w3-margin w3-center w3-display-container">
+<label>Card 2 Title: </label><input id="c2 title" type="text"/><br>
+<label>Card 2 Content: </label><br>
+<textarea rows="4" cols="50" id="c2content">Enter text here...</textarea>
+</div>
+<div class="w3-card-2 w3-container w3-padding w3-margin w3-center w3-display-container">
+<label>Card 3 Title: </label><input id="c3 title" type="text"/><br>
+<label>Youtube Channel URL: </label><input id="ytchannel" type="url"/><br>
+<label>Youtube Channel Name: </label><input id="ytchannelname" type="text"/>
+</div>
+<div class="w3-card-2 w3-container w3-padding w3-margin w3-center w3-display-container">
+<label>Card 4 Title: </label><input id="c4 title" type="text"/><br>
+<label>Clan URL: </label><input id="crclan" type="url"/><br>
+<label>Clan Name: </label><input id="crclanname" type="text"/>
+</div>
+<div class="w3-center w3-blue w3-round">
+<label class="w3-margin">Web Footer:</label><input id="footer" type="text"/>
+</div>
+<input class="w3-center w3-button w3-border" onClick="submit()" type="button" value="生成"/>
+</div>
+	<script>
+	function submit() {
+		var html = '<html><head><title>'+document.getElementById("web title").value+'</title><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"></head><body><div class="w3-container"><h1 class="w3-blue w3-round w3-center">'+document.getElementById("web title").value+'</h1><div class="w3-card-2 w3-container w3-center w3-padding w3-margin w3-animate-top"><h2 class="w3-text-blue w3-center">'+document.getElementById("c1 title").value+'</h2><embed width="1280" height="720" src="'+document.getElementById("ytvideo").value+'"><p class="w3-text-gray">'+document.getElementById("ytvideoname").value+'</p></div><div class="w3-card-2 w3-container w3-center w3-padding w3-margin w3-animate-left"><h2 class="w3-text-blue w3-center">'+document.getElementById("c2 title").value+'</h2><p class="w3-text-gray">'+document.getElementById("c2content").value+'</p></div><div class="w3-card-2 w3-container w3-center w3-padding w3-margin w3-animate-right"><h2 class="w3-text-blue w3-center">'+document.getElementById("c3 title").value+'</h2><a class="w3-text-gray" href="'+document.getElementById("ytchannel").value+'">'+document.getElementById("ytchannelname").value+'</a></div><div class="w3-card-2 w3-container w3-center w3-padding w3-margin w3-animate-bottom"><h2 class="w3-text-blue w3-center">'+document.getElementById("c4 title").value+'</h2><a class="w3-text-gray" href="'+document.getElementById("crclan").value+'">'+document.getElementById("crclanname").value+'</a></div><h1 class="w3-blue w3-round w3-center" style="float:bottom">'+document.getElementById("footer").value+'</h1></div></body></html>';
+		document.write(html);
+	}
+	</script>
+</body>
+</html>
