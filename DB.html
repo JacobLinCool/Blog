@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+</head>
+<body>
+<textarea id="text"></textarea>
+<button onclick="save()" type="button">SAVE</button>
+<input type="text" id="list"/>
+<button onclick="search()">Search</button>
+<button onclick="list()">List All</button>
+<button onclick="clearr()">Clear All</button>
+<div id="result"></div>
+
+<script>
+var db = localStorage;
+if(!db.list) {
+db.list=0;
+}
+document.getElementById("result").innerHTML = "We now have " + db.list + " notes.";
+function save() {
+    if(typeof(Storage) !== "undefined") {
+        if (document.getElementById("text").value) {
+           db.setItem(Number(db.list)+1, document.getElementById("text").value);
+document.getElementById("result").innerHTML = "Saved!";
+db.list = Number(db.list)+1;
+        }
+    } else {
+        document.getElementById("result").innerHTML = "Sorry, your browser does not support web storage.";
+    }
+}
+function search() {
+document.getElementById("result").innerHTML = db.getItem(document.getElementById("list").value);
+}
+function list() {
+document.getElementById("result").innerHTML = "<table>";
+document.getElementById("result").innerHTML += "<tr><th>ID</th><th>Content</th></tr>";
+var i =1;
+while(db.getItem(i)) {
+document.getElementById("result").innerHTML += "<tr><td>"+i+"</td><td>"+db.getItem(i)+"</td></tr>";
+i++;
+}
+document.getElementById("result").innerHTML += "</table>";
+}
+function clearr() {
+document.getElementById("result").innerHTML= "";
+var i =1;
+while(db.getItem(i)) {
+db.setItem(i, "");
+i++;
+}
+db.list = 0;
+}
+</script>
+</body>
+</html>
