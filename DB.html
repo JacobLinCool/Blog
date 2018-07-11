@@ -22,6 +22,7 @@ function save() {
     if(typeof(Storage) !== "undefined") {
         if (document.getElementById("text").value) {
            db.setItem(Number(db.list)+1, document.getElementById("text").value);
+db.setItem((Number(db.list)+1).toString()+"-date", Date(Date.now()).toString());
 document.getElementById("result").innerHTML = "Saved!";
 db.list = Number(db.list)+1;
         }
@@ -30,14 +31,14 @@ db.list = Number(db.list)+1;
     }
 }
 function search() {
-document.getElementById("result").innerHTML = db.getItem(document.getElementById("list").value);
+document.getElementById("result").innerHTML = db.getItem(document.getElementById("list").value) + "<br>" + db.getItem(document.getElementById("list").value +"-date");
 }
 function list() {
 document.getElementById("result").innerHTML = "<table id='table'>";
-document.getElementById("table").innerHTML += "<tr><th>ID</th><th>Content</th></tr>";
+document.getElementById("table").innerHTML += "<tr><th>ID</th><th>Content</th><th>Time</th></tr>";
 var i =1;
 while(db.getItem(i)) {
-document.getElementById("table").innerHTML += "<tr><td>"+i+"</td><td>"+db.getItem(i)+"</td></tr>";
+document.getElementById("table").innerHTML += "<tr><td>"+i+"</td><td>"+db.getItem(i)+"</td><td>"+ db.getItem(i+"-date") +"</td></tr>";
 i++;
 }
 }
