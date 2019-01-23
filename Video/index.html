@@ -100,14 +100,14 @@
         }
         function VideoNext(list) {
             if(elm.id("list-"+list+"-video-"+(nowVid[list]+1))) {
-                elm.id("list-"+list+"-video-"+(nowVid[list]+1)).style.animation = "videoRightIn";
-                this.style.animation = "videoLeftOut";
+                elm.id("list-"+list+"-video-"+(nowVid[list]+1)).style.animation = "videoRightIn 0.5s";
+                this.style.animation = "videoLeftOut 0.5s";
             }
         }
         function VideoLast(list) {
             if(elm.id("list-"+list+"-video-"+(nowVid[list]-1))) {
-                elm.id("list-"+list+"-video-"+(nowVid[list]-1)).style.animation = "videoLeftIn";
-                this.style.animation = "videoRightOut";
+                elm.id("list-"+list+"-video-"+(nowVid[list]-1)).style.animation = "videoLeftIn 0.5s";
+                this.style.animation = "videoRightOut 0.5s";
             }
         }
     </script>
