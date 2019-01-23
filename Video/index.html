@@ -1,52 +1,30 @@
 <html>
 <head>
-<title>JLCVideo</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js"></script>-->
-	
-    <script>
-    var copyTextareaBtn = document.querySelector('.js-textareacopybtn');
-
-copyTextareaBtn.addEventListener('click', function(event) {
-  var copyTextarea = document.querySelector('.js-copytextarea');
-  copyTextarea.select();
-
-  try {
-    var successful = document.execCommand('copy');
-    var msg = successful ? 'successful' : 'unsuccessful';
-    console.log('Copying text command was ' + msg);
-  } catch (err) {
-    console.log('Oops, unable to copy');
-  }
-});
-    </script>
-  <style>
-    
-a {
-	color:#0095dd;
-	text-decoration:none;
-}
-a:hover, a:focus {
-	color:#2255aa;
-	text-decoration:underline;
-}
-  </style>
+    <title>JacobLinCool Video</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://cdn.jsdelivr.net/gh/Merret/UsefulJS@0.5.3/js/xhr.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/Merret/UsefulJS@0.5.3/js/element.min.js"></script>
+    <style>
+        body {
+            text-align: center;
+        }
+        a {
+            color:#0095dd;
+            text-decoration:none;
+        }
+        a:hover, a:focus {
+            color:#2255aa;
+            text-decoration:underline;
+        }
+    </style>
 </head>
 <body>
-<h1>當期戲劇</h1>
-	<h2><a href="url/他們在畢業的前一天爆炸II">他們在畢業的前一天爆炸II</a></h2>
-	<br>
-	<br>
-<h2>Coming Soon</h2>
-	<h2><a href="url/麻醉風暴2">麻醉風暴2</a></h2>
-	<br>
-<p style="color:red;">本平台目前只支援 iOS 作業系統  由此購買Apple產品: <a style="color:red;" href="https://www.apple.com">www.apple.com</a></p>
-  <p>如使用其他作業系統請<a href="./player">使用我們的播放器</a></p>
-	
-	<!--TEST-->
-	
-	
-	
-	<!--TEST END-->
+    <h1 id="TotalViewCount"></h1>
+    <h2 id="TotalSubscriberCount"></h2>
+    <script>
+        var yd = xhr.json("https://www.googleapis.com/youtube/v3/channels?part=statistics&id=UCd9MLzu1CaSYfUM0SxUALAg&key=AIzaSyDtPrXtzwYZIXkay1elUO9fVw5ZkJWtSH8");
+        elm.id("TotalViewCount").innerHTML = "Total Views: " + yd.items[0].statistics.viewCount;
+        elm.id("TotalSubscriberCount").innerHTML = "Total Subscribers: " + yd.items[0].statistics.subscriberCount;
+    </script>
 </body>
 </html>
