@@ -16,6 +16,16 @@
             color:#2255aa;
             text-decoration:underline;
         }
+        @keyframes videoLeftIn {
+            from {
+                left:-300px;
+                opacity:0;
+            } to {
+                left:0px;
+                opacity:1;
+                display:block;
+            }
+        }
         @keyframes videoLeftOut {
             from {
                 left:0px;
@@ -23,15 +33,27 @@
             } to {
                 left:-300px;
                 opacity:0;
+                display:none;
             }
         }
         @keyframes videoRightIn {
+            from {
+                right:300px;
+                opacity:0;
+            } to {
+                right:0px;
+                opacity:1;
+                display:block;
+            }
+        }
+        @keyframes videoRightOut {
             from {
                 right:0px;
                 opacity:1;
             } to {
                 right:300px;
                 opacity:0;
+                display:none;
             }
         }
     </style>
@@ -65,6 +87,22 @@
                 PL.appendChild(vid);
             }
             elm.id("list-"+i+"-video-0").style.display = "block";
+        }
+        function VideoNext() {
+            var list = this.id.substr(5,1);
+            var video = this.id.substr(13,1);
+            if(elm.id("list-"+list+"-video-"+(Number(video)+1))) {
+                elm.id("list-"+list+"-video-"+(Number(video)+1)).style.animation = "videoRightIn";
+                this.style.animation = "videoLeftOut";
+            }
+        }
+        function VideoLast() {
+            var list = this.id.substr(5,1);
+            var video = this.id.substr(13,1);
+            if(elm.id("list-"+list+"-video-"+(Number(video)-1))) {
+                elm.id("list-"+list+"-video-"+(Number(video)-1)).style.animation = "videoLeftIn";
+                this.style.animation = "videoRightOut";
+            }
         }
     </script>
 </body>
