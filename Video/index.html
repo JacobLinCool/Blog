@@ -101,13 +101,15 @@
         function VideoNext(list) {
             if(elm.id("list-"+list+"-video-"+(nowVid[list]+1))) {
                 elm.id("list-"+list+"-video-"+(nowVid[list]+1)).style.animation = "videoRightIn 0.5s";
-                this.style.animation = "videoLeftOut 0.5s";
+                elm.id("list-"+list+"-video-"+nowVid[list]).style.animation = "videoLeftOut 0.5s";
+                nowVid[list]++;
             }
         }
         function VideoLast(list) {
             if(elm.id("list-"+list+"-video-"+(nowVid[list]-1))) {
                 elm.id("list-"+list+"-video-"+(nowVid[list]-1)).style.animation = "videoLeftIn 0.5s";
-                this.style.animation = "videoRightOut 0.5s";
+                elm.id("list-"+list+"-video-"+nowVid[list]).style.animation = "videoRightOut 0.5s";
+                nowVid[list]--;
             }
         }
     </script>
