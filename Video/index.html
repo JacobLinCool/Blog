@@ -23,7 +23,7 @@
             } to {
                 left:0px;
                 opacity:1;
-                display:block;
+                display:1;
             }
         }
         @keyframes videoLeftOut {
@@ -43,7 +43,7 @@
             } to {
                 right:0px;
                 opacity:1;
-                display:block;
+                display:1;
             }
         }
         @keyframes videoRightOut {
@@ -65,6 +65,7 @@
     </div>
     <script>
         var PL = elm.id("PlayLists");
+        var nowVid = [];
         var yd1 = xhr.json("https://www.googleapis.com/youtube/v3/channels?part=statistics&id=UCd9MLzu1CaSYfUM0SxUALAg&key=AIzaSyDtPrXtzwYZIXkay1elUO9fVw5ZkJWtSH8");
         elm.id("TotalViewCount").innerHTML = "Views: " + yd1.items[0].statistics.viewCount;
         elm.id("TotalSubscriberCount").innerHTML = "Subscribers: " + yd1.items[0].statistics.subscriberCount;
@@ -73,6 +74,10 @@
             var pln = document.createElement("h3");
             pln.innerHTML = yd2.items[i].snippet.title;
             PL.appendChild(pln);
+            var VLB = document.createElement("button");
+            VLB.id = "b-" + i;
+            VLB.onclick = function() {VideoLast();};
+            PL.appendChild(VLB);
             var yd3 = xhr.json("https://www.googleapis.com/youtube/v3/playlistItems?part=snippet,contentDetails&playlistId="+yd2.items[0].id+"&maxResults=10&key=AIzaSyDtPrXtzwYZIXkay1elUO9fVw5ZkJWtSH8");
             for(var j = 0; j < yd3.items.length; j++) {
                 var vid = document.createElement("iframe");
@@ -86,21 +91,24 @@
                 vid.style.display = "none";
                 PL.appendChild(vid);
             }
-            elm.id("list-"+i+"-video-0").style.display = "block";
+            elm.id("list-"+i+"-video-0").style.display = "1";
+            var VNB = document.createElement("button");
+            VNB.id = "b-" + i;
+            VNB.onclick = function() {VideoNext();};
+            PL.appendChild(VNB);
+            nowVid.push(0);
         }
         function VideoNext() {
-            var list = this.id.substr(5,1);
-            var video = this.id.substr(13,1);
-            if(elm.id("list-"+list+"-video-"+(Number(video)+1))) {
-                elm.id("list-"+list+"-video-"+(Number(video)+1)).style.animation = "videoRightIn";
+            var list = this.id.substr(2,1);
+            if(elm.id("list-"+list+"-video-"+(nowVid[list]+1))) {
+                elm.id("list-"+list+"-video-"+(nowVid[list]+1)).style.animation = "videoRightIn";
                 this.style.animation = "videoLeftOut";
             }
         }
         function VideoLast() {
-            var list = this.id.substr(5,1);
-            var video = this.id.substr(13,1);
-            if(elm.id("list-"+list+"-video-"+(Number(video)-1))) {
-                elm.id("list-"+list+"-video-"+(Number(video)-1)).style.animation = "videoLeftIn";
+            var list = this.id.substr(2,1);
+            if(elm.id("list-"+list+"-video-"+(nowVid[list]-1))) {
+                elm.id("list-"+list+"-video-"+(nowVid[list]-1)).style.animation = "videoLeftIn";
                 this.style.animation = "videoRightOut";
             }
         }
