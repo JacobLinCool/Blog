@@ -21,10 +21,30 @@
 <body>
     <h1 id="TotalViewCount"></h1>
     <h2 id="TotalSubscriberCount"></h2>
+    <div id="PlayLists">
+    </div>
     <script>
-        var yd = xhr.json("https://www.googleapis.com/youtube/v3/channels?part=statistics&id=UCd9MLzu1CaSYfUM0SxUALAg&key=AIzaSyDtPrXtzwYZIXkay1elUO9fVw5ZkJWtSH8");
-        elm.id("TotalViewCount").innerHTML = "Views: " + yd.items[0].statistics.viewCount;
-        elm.id("TotalSubscriberCount").innerHTML = "Subscribers: " + yd.items[0].statistics.subscriberCount;
+        var PL = elm.id("PlayLists");
+        var yd1 = xhr.json("https://www.googleapis.com/youtube/v3/channels?part=statistics&id=UCd9MLzu1CaSYfUM0SxUALAg&key=AIzaSyDtPrXtzwYZIXkay1elUO9fVw5ZkJWtSH8");
+        elm.id("TotalViewCount").innerHTML = "Views: " + yd1.items[0].statistics.viewCount;
+        elm.id("TotalSubscriberCount").innerHTML = "Subscribers: " + yd1.items[0].statistics.subscriberCount;
+        var yd2 = xhr.json("https://www.googleapis.com/youtube/v3/playlists?part=snippet,contentDetails&channelId=UCd9MLzu1CaSYfUM0SxUALAg&maxResults=10&key=AIzaSyDtPrXtzwYZIXkay1elUO9fVw5ZkJWtSH8");
+        for(var i = 0; i < yd2.items.length; i++) {
+            var pln = document.createElement("h3");
+            pln.innerHTML = yd2.items[i].snippet.title;
+            PL.appendChild(pln);
+            var yd3 = xhr.json("https://www.googleapis.com/youtube/v3/playlistItems?part=snippet,contentDetails&playlistId="+yd2.items[0].id+"&maxResults=10&key=AIzaSyDtPrXtzwYZIXkay1elUO9fVw5ZkJWtSH8");
+            for(var j = 0; j < yd3.items.length; j++) {
+                var vid = document.createElement("iframe");
+                vid.width = "560";
+                vid.height = "315";
+                vid.src = "https://www.youtube.com/embed/" + yd3.items[j].contentDetails.videoId;
+                vid.frameborder = "0";
+                vid.allow = "accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture";
+                vid.allowfullscreen = true;
+                PL.appendChild(vid);
+            }
+        }
     </script>
 </body>
 </html>
