@@ -91,7 +91,7 @@
             VLB.onclick = function() {VideoLast(this.id.substr(2,1));};
             PL.appendChild(VLB);
             */
-            var yd3 = xhr.json("https://www.googleapis.com/youtube/v3/playlistItems?part=snippet,contentDetails&playlistId="+yd2.items[0].id+"&maxResults=10&key=AIzaSyDtPrXtzwYZIXkay1elUO9fVw5ZkJWtSH8");
+            var yd3 = xhr.json("https://www.googleapis.com/youtube/v3/playlistItems?part=snippet,contentDetails&playlistId="+yd2.items[i].id+"&maxResults=10&key=AIzaSyDtPrXtzwYZIXkay1elUO9fVw5ZkJWtSH8");
             for(var j = 0; j < yd3.items.length; j++) {
                 var vid = document.createElement("iframe");
                 vid.className = "mySlides" + i;
