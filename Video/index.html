@@ -69,6 +69,7 @@
     </div>
     <script>
         var PL = elm.id("PlayLists");
+        var slideIndex = [1,1];
         var slideId = [];
         var yd1 = xhr.json("https://www.googleapis.com/youtube/v3/channels?part=statistics&id=UCd9MLzu1CaSYfUM0SxUALAg&key=AIzaSyDtPrXtzwYZIXkay1elUO9fVw5ZkJWtSH8");
         elm.id("TotalViewCount").innerHTML = "Views: " + yd1.items[0].statistics.viewCount;
@@ -113,9 +114,8 @@
             */
             div.innerHTML += '<button class="w3-button w3-black w3-display-left" onclick="plusDivs(-1, '+i+')">&#10094;</button><button class="w3-button w3-black w3-display-right" onclick="plusDivs(1, '+i+')">&#10095;</button>';
             slideId.push("mySlides" + i);
+            showDivs(1, i);
         }
-        var slideIndex = [1,1];
-        showDivs(1, 0);
         
         function plusDivs(n, no) {
             showDivs(slideIndex[no] += n, no);
