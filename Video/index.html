@@ -4,6 +4,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script src="https://cdn.jsdelivr.net/gh/Merret/UsefulJS@0.5.3/js/xhr.min.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/Merret/UsefulJS@0.5.3/js/element.min.js"></script>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <style>
         body {
             text-align: center;
@@ -56,6 +57,9 @@
                 display:none;
             }
         }
+        .mySlides {
+            display:none;
+        }
     </style>
 </head>
 <body>
@@ -65,23 +69,31 @@
     </div>
     <script>
         var PL = elm.id("PlayLists");
-        var nowVid = [];
+        var slideId = [];
         var yd1 = xhr.json("https://www.googleapis.com/youtube/v3/channels?part=statistics&id=UCd9MLzu1CaSYfUM0SxUALAg&key=AIzaSyDtPrXtzwYZIXkay1elUO9fVw5ZkJWtSH8");
         elm.id("TotalViewCount").innerHTML = "Views: " + yd1.items[0].statistics.viewCount;
         elm.id("TotalSubscriberCount").innerHTML = "Subscribers: " + yd1.items[0].statistics.subscriberCount;
         var yd2 = xhr.json("https://www.googleapis.com/youtube/v3/playlists?part=snippet,contentDetails&channelId=UCd9MLzu1CaSYfUM0SxUALAg&maxResults=10&key=AIzaSyDtPrXtzwYZIXkay1elUO9fVw5ZkJWtSH8");
         for(var i = 0; i < yd2.items.length; i++) {
+            var div = document.createElement("div");
+            div.width = "560";
+            div.height = "315";
+            div.className = "w3-content w3-display-container";
+            PL.appendChild(div);
             var pln = document.createElement("h3");
             pln.innerHTML = yd2.items[i].snippet.title;
-            PL.appendChild(pln);
+            div.appendChild(pln);
+            /*
             var VLB = document.createElement("button");
             VLB.id = "b-" + i;
             VLB.innerHTML = "<";
             VLB.onclick = function() {VideoLast(this.id.substr(2,1));};
             PL.appendChild(VLB);
+            */
             var yd3 = xhr.json("https://www.googleapis.com/youtube/v3/playlistItems?part=snippet,contentDetails&playlistId="+yd2.items[0].id+"&maxResults=10&key=AIzaSyDtPrXtzwYZIXkay1elUO9fVw5ZkJWtSH8");
             for(var j = 0; j < yd3.items.length; j++) {
                 var vid = document.createElement("iframe");
+                vid.className = "mySlides" + i;
                 vid.width = "560";
                 vid.height = "315";
                 vid.src = "https://www.youtube.com/embed/" + yd3.items[j].contentDetails.videoId;
@@ -90,33 +102,35 @@
                 vid.allowfullscreen = "allowfullscreen";
                 vid.id = "list-" + i + "-video-" + j;
                 vid.style.display = "none";
-                PL.appendChild(vid);
+                div.appendChild(vid);
             }
-            elm.id("list-"+i+"-video-0").style.display = "inline-block";
+            /*
             var VNB = document.createElement("button");
             VNB.id = "b-" + i;
             VNB.innerHTML = ">";
             VNB.onclick = function() {VideoNext(this.id.substr(2,1));};
             PL.appendChild(VNB);
-            nowVid.push(0);
+            */
+            div.innerHTML += '<button class="w3-button w3-black w3-display-left" onclick="plusDivs(-1, '+i+')">&#10094;</button><button class="w3-button w3-black w3-display-right" onclick="plusDivs(1, '+i+')">&#10095;</button>';
+            slideId.push("mySlides" + i);
         }
-        function VideoNext(list) {
-            if(elm.id("list-"+list+"-video-"+(nowVid[list]+1))) {
-                elm.id("list-"+list+"-video-"+(nowVid[list]+1)).style.animation = "videoRightIn 0.5s";
-                setTimeout(function() {elm.id("list-"+list+"-video-"+(nowVid[list]+1)).style.display="inline-block"}, 500);
-                elm.id("list-"+list+"-video-"+nowVid[list]).style.animation = "videoLeftOut 0.5s";
-                setTimeout(function() {elm.id("list-"+list+"-video-"+nowVid[list]).style.display="none"}, 500);
-                nowVid[list]++;
-            }
+        var slideIndex = [1,1];
+        showDivs(1, 0);
+        showDivs(1, 1);
+        
+        function plusDivs(n, no) {
+            showDivs(slideIndex[no] += n, no);
         }
-        function VideoLast(list) {
-            if(elm.id("list-"+list+"-video-"+(nowVid[list]-1))) {
-                elm.id("list-"+list+"-video-"+(nowVid[list]-1)).style.animation = "videoLeftIn 0.5s";
-                setTimeout(function() {elm.id("list-"+list+"-video-"+(nowVid[list]-1)).style.display="inline-block"}, 500);
-                elm.id("list-"+list+"-video-"+nowVid[list]).style.animation = "videoRightOut 0.5s";
-                setTimeout(function() {elm.id("list-"+list+"-video-"+nowVid[list]).style.display="none"}, 500);
-                nowVid[list]--;
+        
+        function showDivs(n, no) {
+            var i;
+            var x = document.getElementsByClassName(slideId[no]);
+            if (n > x.length) {slideIndex[no] = 1}
+            if (n < 1) {slideIndex[no] = x.length}
+            for (i = 0; i < x.length; i++) {
+                x[i].style.display = "none";
             }
+            x[slideIndex[no]-1].style.display = "inline-block";
         }
     </script>
 </body>
