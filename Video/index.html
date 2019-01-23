@@ -100,7 +100,7 @@
                 vid.src = "https://www.youtube.com/embed/" + yd3.items[j].contentDetails.videoId;
                 vid.frameborder = "0";
                 vid.allow = "accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture";
-                vid.allowfullscreen = "allowfullscreen";
+                vid.setAttribute('allowFullScreen', '');
                 vid.id = "list-" + i + "-video-" + j;
                 vid.style.display = "none";
                 div.appendChild(vid);
