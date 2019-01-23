@@ -16,6 +16,24 @@
             color:#2255aa;
             text-decoration:underline;
         }
+        @keyframes videoLeftOut {
+            from {
+                left:0px;
+                opacity:1;
+            } to {
+                left:-300px;
+                opacity:0;
+            }
+        }
+        @keyframes videoRightIn {
+            from {
+                right:0px;
+                opacity:1;
+            } to {
+                right:300px;
+                opacity:0;
+            }
+        }
     </style>
 </head>
 <body>
@@ -41,9 +59,12 @@
                 vid.src = "https://www.youtube.com/embed/" + yd3.items[j].contentDetails.videoId;
                 vid.frameborder = "0";
                 vid.allow = "accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture";
-                vid.allowfullscreen = true;
+                vid.allowfullscreen = "allowfullscreen";
+                vid.id = "list-" + i + "-video-" + j;
+                vid.style.display = "none";
                 PL.appendChild(vid);
             }
+            elm.id("list-"+i+"-video-0").style.display = "block";
         }
     </script>
 </body>
