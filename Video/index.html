@@ -76,6 +76,7 @@
             PL.appendChild(pln);
             var VLB = document.createElement("button");
             VLB.id = "b-" + i;
+            VLB.innerHTML = "<";
             VLB.onclick = function() {VideoLast(this.id.substr(2,1));};
             PL.appendChild(VLB);
             var yd3 = xhr.json("https://www.googleapis.com/youtube/v3/playlistItems?part=snippet,contentDetails&playlistId="+yd2.items[0].id+"&maxResults=10&key=AIzaSyDtPrXtzwYZIXkay1elUO9fVw5ZkJWtSH8");
@@ -94,6 +95,7 @@
             elm.id("list-"+i+"-video-0").style.display = "inline-block";
             var VNB = document.createElement("button");
             VNB.id = "b-" + i;
+            VLB.innerHTML = ">";
             VNB.onclick = function() {VideoNext(this.id.substr(2,1));};
             PL.appendChild(VNB);
             nowVid.push(0);
