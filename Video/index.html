@@ -95,7 +95,7 @@
             elm.id("list-"+i+"-video-0").style.display = "inline-block";
             var VNB = document.createElement("button");
             VNB.id = "b-" + i;
-            VLB.innerHTML = ">";
+            VNB.innerHTML = ">";
             VNB.onclick = function() {VideoNext(this.id.substr(2,1));};
             PL.appendChild(VNB);
             nowVid.push(0);
@@ -103,14 +103,18 @@
         function VideoNext(list) {
             if(elm.id("list-"+list+"-video-"+(nowVid[list]+1))) {
                 elm.id("list-"+list+"-video-"+(nowVid[list]+1)).style.animation = "videoRightIn 0.5s";
+                setTimeout(function() {elm.id("list-"+list+"-video-"+(nowVid[list]+1)).style.display="inline-block"}, 500);
                 elm.id("list-"+list+"-video-"+nowVid[list]).style.animation = "videoLeftOut 0.5s";
+                setTimeout(function() {elm.id("list-"+list+"-video-"+nowVid[list]).style.display="none"}, 500);
                 nowVid[list]++;
             }
         }
         function VideoLast(list) {
             if(elm.id("list-"+list+"-video-"+(nowVid[list]-1))) {
                 elm.id("list-"+list+"-video-"+(nowVid[list]-1)).style.animation = "videoLeftIn 0.5s";
+                setTimeout(function() {elm.id("list-"+list+"-video-"+(nowVid[list]-1)).style.display="inline-block"}, 500);
                 elm.id("list-"+list+"-video-"+nowVid[list]).style.animation = "videoRightOut 0.5s";
+                setTimeout(function() {elm.id("list-"+list+"-video-"+nowVid[list]).style.display="none"}, 500);
                 nowVid[list]--;
             }
         }
