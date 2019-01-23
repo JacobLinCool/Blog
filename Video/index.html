@@ -23,7 +23,7 @@
             } to {
                 left:0px;
                 opacity:1;
-                display:1;
+                display:inline-block;
             }
         }
         @keyframes videoLeftOut {
@@ -43,7 +43,7 @@
             } to {
                 right:0px;
                 opacity:1;
-                display:1;
+                display:inline-block;
             }
         }
         @keyframes videoRightOut {
@@ -76,7 +76,7 @@
             PL.appendChild(pln);
             var VLB = document.createElement("button");
             VLB.id = "b-" + i;
-            VLB.onclick = function() {VideoLast();};
+            VLB.onclick = function() {VideoLast(this.id.substr(2,1));};
             PL.appendChild(VLB);
             var yd3 = xhr.json("https://www.googleapis.com/youtube/v3/playlistItems?part=snippet,contentDetails&playlistId="+yd2.items[0].id+"&maxResults=10&key=AIzaSyDtPrXtzwYZIXkay1elUO9fVw5ZkJWtSH8");
             for(var j = 0; j < yd3.items.length; j++) {
@@ -91,22 +91,20 @@
                 vid.style.display = "none";
                 PL.appendChild(vid);
             }
-            elm.id("list-"+i+"-video-0").style.display = "1";
+            elm.id("list-"+i+"-video-0").style.display = "inline-block";
             var VNB = document.createElement("button");
             VNB.id = "b-" + i;
-            VNB.onclick = function() {VideoNext();};
+            VNB.onclick = function() {VideoNext(this.id.substr(2,1));};
             PL.appendChild(VNB);
             nowVid.push(0);
         }
-        function VideoNext() {
-            var list = this.id.substr(2,1);
+        function VideoNext(list) {
             if(elm.id("list-"+list+"-video-"+(nowVid[list]+1))) {
                 elm.id("list-"+list+"-video-"+(nowVid[list]+1)).style.animation = "videoRightIn";
                 this.style.animation = "videoLeftOut";
             }
         }
-        function VideoLast() {
-            var list = this.id.substr(2,1);
+        function VideoLast(list) {
             if(elm.id("list-"+list+"-video-"+(nowVid[list]-1))) {
                 elm.id("list-"+list+"-video-"+(nowVid[list]-1)).style.animation = "videoLeftIn";
                 this.style.animation = "videoRightOut";
