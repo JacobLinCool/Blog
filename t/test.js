@@ -1,5 +1,5 @@
 var DataInURL = {};
-var u = this.src;
+var u = document.getElementsByClassName("test-class")[0].src;
 if(u.search("\\?")!=-1) u = u.substr(u.search("\\?"));
 var _f = 1;
 while(_f || u.search("\\&")!=-1) {
