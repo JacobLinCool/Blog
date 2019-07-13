@@ -1,5 +1,5 @@
-var DataInURL = {};
-var u = document.getElementsByClassName("test-class")[0].src;
+var SFRKUD = {};
+var u = document.getElementsByClassName("SFRK")[0].src;
 if(u.search("\\?")!=-1) u = u.substr(u.search("\\?"));
 var _f = 1;
 while(_f || u.search("\\&")!=-1) {
@@ -17,12 +17,8 @@ while(_f || u.search("\\&")!=-1) {
     }
     v2 = tmp;
     if(tmp > u.length) break;
-    DataInURL[decodeURIComponent(u.substring(k1, k2))] = decodeURIComponent(u.substring(v1, v2));
+    SFRKUD[decodeURIComponent(u.substring(k1, k2))] = decodeURIComponent(u.substring(v1, v2));
     u = u.substr(tmp);
 }
 
-function url(key) {
-    return DataInURL[key];
-}
-alert(u);
-alert(url("i"));
+alert(SFRKUD["i"]);
